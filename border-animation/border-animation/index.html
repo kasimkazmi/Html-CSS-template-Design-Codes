@@ -1,15 +1,965 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Border Animation</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Border Animations Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Poppins, sans-serif;
+            color: #f0f0f0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0b0d15;
+            color: #a2a5b3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1400px;
+        }
+
+        /* Base card styles - removed hover effect */
+        .card {
+            margin: 0 auto;
+            padding: 2em;
+            width: 300px;
+            background: #1c1f2b;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .card h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #a2a5b3;
+        }
+
+        /* Individual CSS custom properties for each animation */
+        @property --single-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --rainbow-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --dual-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --segment-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --neon-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --pulse-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --reverse-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --chase-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --elegant-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --fire-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --ocean-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --hologram-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --matrix-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --quantum-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --aurora-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --plasma-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --galaxy-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        /* Single color spinning border */
+        .single-spin::after,
+        .single-spin::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--single-angle),
+                transparent 270deg,
+                #ff4545
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: single-spin 3s linear infinite;
+        }
+        .single-spin::before {
+            filter: blur(1.5rem);
+            opacity: 0.5;
+        }
+
+        /* Rainbow spinning border */
+        .rainbow-spin::after,
+        .rainbow-spin::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--rainbow-angle),
+                #ff4545,
+                #ff8c00,
+                #ffd700,
+                #00ff99,
+                #006aff,
+                #8a2be2,
+                #ff4545
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: rainbow-spin 2s linear infinite;
+        }
+        .rainbow-spin::before {
+            filter: blur(1.5rem);
+            opacity: 0.4;
+        }
+
+        /* Two-color opposite spinning */
+        .dual-spin::after,
+        .dual-spin::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--dual-angle),
+                #006aff 0%,
+                #006aff 50%,
+                #ff0095 50%,
+                #ff0095 100%
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: dual-spin 4s linear infinite;
+        }
+        .dual-spin::before {
+            filter: blur(1.5rem);
+            opacity: 0.5;
+        }
+
+        /* Disconnected segments */
+        .segment-spin::after,
+        .segment-spin::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--segment-angle),
+                #00ff99 0%,
+                #00ff99 40%,
+                transparent 40%,
+                transparent 60%,
+                #ff4545 60%,
+                #ff4545 100%
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: segment-spin 3s linear infinite;
+        }
+
+        /* Neon cyberpunk glow */
+        .neon-glow::after,
+        .neon-glow::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--neon-angle),
+                #00ffff,
+                #ff00ff,
+                #ffff00,
+                #00ffff
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 2px;
+            border-radius: 10px;
+            animation: neon-spin 2s linear infinite;
+        }
+        .neon-glow::before {
+            filter: blur(2rem);
+            opacity: 0.7;
+        }
+
+        /* Pulsing border */
+        .pulse-border::after,
+        .pulse-border::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--pulse-angle),
+                transparent 180deg,
+                #ff6b6b,
+                transparent 360deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 4px;
+            border-radius: 10px;
+            animation: pulse-spin 3s linear infinite, pulse 2s ease-in-out infinite;
+        }
+
+        /* Reverse purple spin */
+        .reverse-spin::after,
+        .reverse-spin::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--reverse-angle),
+                #9d4edd,
+                #c77dff,
+                #e0aaff,
+                #9d4edd
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: reverse-spin 4s linear infinite;
+        }
+        .reverse-spin::before {
+            filter: blur(1.5rem);
+            opacity: 0.5;
+        }
+
+        /* Gradient chase segments */
+        .chase-spin::after,
+        .chase-spin::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--chase-angle),
+                #ff9a00 0%,
+                #ff9a00 15%,
+                transparent 15%,
+                transparent 35%,
+                #00d4ff 35%,
+                #00d4ff 50%,
+                transparent 50%,
+                transparent 70%,
+                #ff0080 70%,
+                #ff0080 85%,
+                transparent 85%,
+                transparent 100%
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: chase-spin 2s linear infinite;
+        }
+
+        /* Elegant minimal */
+        .elegant-spin::after,
+        .elegant-spin::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--elegant-angle),
+                transparent 300deg,
+                rgba(255, 255, 255, 0.9) 315deg,
+                transparent 330deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 2px;
+            border-radius: 10px;
+            animation: elegant-spin 6s linear infinite;
+        }
+        .elegant-spin::before {
+            filter: blur(1rem);
+            opacity: 0.6;
+        }
+
+        /* Fire theme */
+        .fire-theme::after,
+        .fire-theme::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--fire-angle),
+                #ff4500,
+                #ff6347,
+                #ffd700,
+                #ff8c00,
+                #ff4500
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: fire-spin 1.5s linear infinite;
+        }
+        .fire-theme::before {
+            filter: blur(2rem);
+            opacity: 0.6;
+        }
+
+        /* Ocean theme */
+        .ocean-theme::after,
+        .ocean-theme::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--ocean-angle),
+                #006994,
+                #47b5ff,
+                #06ffa5,
+                #4ca5dc,
+                #006994
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: ocean-spin 5s linear infinite;
+        }
+        .ocean-theme::before {
+            filter: blur(1.8rem);
+            opacity: 0.4;
+        }
+
+        /* Electric thunder sparkle theme */
+        .electric-theme::after,
+        .electric-theme::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--electric-angle),
+                transparent 0deg,
+                #00d4ff 5deg,
+                transparent 10deg,
+                transparent 35deg,
+                #ffffff 40deg,
+                transparent 45deg,
+                transparent 70deg,
+                #4169e1 75deg,
+                transparent 80deg,
+                transparent 120deg,
+                #87ceeb 125deg,
+                transparent 130deg,
+                transparent 180deg,
+                #ffffff 185deg,
+                transparent 190deg,
+                transparent 240deg,
+                #00bfff 245deg,
+                transparent 250deg,
+                transparent 300deg,
+                #e0e6ff 305deg,
+                transparent 310deg,
+                transparent 360deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: electric-spin 1s linear infinite, electric-flicker 0.3s ease-in-out infinite;
+        }
+        /* Holographic iridescent effect */
+        .hologram-border::after,
+        .hologram-border::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--hologram-angle),
+                #ff0080 0deg,
+                #00d4ff 30deg,
+                #ffff00 60deg,
+                #ff4500 90deg,
+                #8a2be2 120deg,
+                #00ff80 150deg,
+                #ff1493 180deg,
+                #00bfff 210deg,
+                #ffd700 240deg,
+                #ff6347 270deg,
+                #9370db 300deg,
+                #20b2aa 330deg,
+                #ff0080 360deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: hologram-spin 2.5s linear infinite, hologram-shimmer 4s ease-in-out infinite;
+        }
+        .hologram-border::before {
+            filter: blur(2rem);
+            opacity: 0.6;
+        }
+
+        /* Digital matrix rain effect */
+        .matrix-border::after,
+        .matrix-border::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--matrix-angle),
+                transparent 0deg,
+                #00ff41 2deg,
+                transparent 4deg,
+                transparent 18deg,
+                #39ff14 20deg,
+                transparent 22deg,
+                transparent 36deg,
+                #00ff88 38deg,
+                transparent 40deg,
+                transparent 54deg,
+                #00ff41 56deg,
+                transparent 58deg,
+                transparent 72deg,
+                #39ff14 74deg,
+                transparent 76deg,
+                transparent 90deg,
+                #00ff88 92deg,
+                transparent 94deg,
+                transparent 108deg,
+                #00ff41 110deg,
+                transparent 112deg,
+                transparent 360deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: matrix-spin 1.2s linear infinite, matrix-glitch 0.8s ease-in-out infinite;
+        }
+        .matrix-border::before {
+            filter: blur(1rem);
+            opacity: 0.8;
+        }
+
+        /* Quantum particle wave */
+        .quantum-border::after,
+        .quantum-border::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--quantum-angle),
+                rgba(138, 43, 226, 0.8) 0deg,
+                rgba(255, 20, 147, 0.9) 45deg,
+                rgba(0, 191, 255, 1) 90deg,
+                rgba(50, 205, 50, 0.9) 135deg,
+                rgba(255, 215, 0, 0.8) 180deg,
+                rgba(255, 69, 0, 0.9) 225deg,
+                rgba(138, 43, 226, 1) 270deg,
+                rgba(255, 20, 147, 0.8) 315deg,
+                rgba(138, 43, 226, 0.8) 360deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 4px;
+            border-radius: 10px;
+            animation: quantum-spin 6s linear infinite, quantum-pulse 2s ease-in-out infinite;
+        }
+        .quantum-border::before {
+            filter: blur(2.5rem);
+            opacity: 0.7;
+        }
+
+        /* Aurora borealis effect */
+        .aurora-border::after,
+        .aurora-border::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--aurora-angle),
+                rgba(0, 255, 127, 0.3) 0deg,
+                rgba(0, 255, 255, 0.8) 60deg,
+                rgba(138, 43, 226, 0.9) 120deg,
+                rgba(255, 105, 180, 0.7) 180deg,
+                rgba(50, 205, 50, 0.6) 240deg,
+                rgba(0, 191, 255, 0.8) 300deg,
+                rgba(0, 255, 127, 0.3) 360deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 3px;
+            border-radius: 10px;
+            animation: aurora-spin 8s linear infinite, aurora-wave 5s ease-in-out infinite;
+        }
+        .aurora-border::before {
+            filter: blur(3rem);
+            opacity: 0.5;
+        }
+
+        /* Plasma energy field */
+        .plasma-border::after,
+        .plasma-border::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--plasma-angle),
+                #ff0080 0deg,
+                #ff4500 20deg,
+                #ffd700 40deg,
+                #ff1493 60deg,
+                #8a2be2 80deg,
+                #ff6347 100deg,
+                #ff0080 120deg,
+                #ff8c00 140deg,
+                #ffd700 160deg,
+                #ff1493 180deg,
+                #9370db 200deg,
+                #ff6347 220deg,
+                #ff0080 240deg,
+                #ff4500 260deg,
+                #ffd700 280deg,
+                #ff1493 300deg,
+                #8a2be2 320deg,
+                #ff6347 340deg,
+                #ff0080 360deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 2px;
+            border-radius: 10px;
+            animation: plasma-spin 1s linear infinite, plasma-intensity 3s ease-in-out infinite;
+        }
+        .plasma-border::before {
+            filter: blur(1.8rem);
+            opacity: 0.9;
+        }
+
+        /* Galaxy spiral effect */
+        .galaxy-border::after,
+        .galaxy-border::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: conic-gradient(
+                from var(--galaxy-angle),
+                #191970 0deg,
+                #4169e1 30deg,
+                #9370db 60deg,
+                #ba55d3 90deg,
+                #ff69b4 120deg,
+                #ff1493 150deg,
+                #dc143c 180deg,
+                #ff4500 210deg,
+                #ffd700 240deg,
+                #adff2f 270deg,
+                #00ff7f 300deg,
+                #00ced1 330deg,
+                #191970 360deg
+            );
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+            padding: 4px;
+            border-radius: 10px;
+            animation: galaxy-spin 12s linear infinite, galaxy-twinkle 2.5s ease-in-out infinite;
+        }
+        .galaxy-border::before {
+            filter: blur(2.2rem);
+            opacity: 0.6;
+        }
+
+        /* Individual keyframe animations */
+        @keyframes single-spin {
+            to { --single-angle: 360deg; }
+        }
+
+        @keyframes rainbow-spin {
+            to { --rainbow-angle: 360deg; }
+        }
+
+        @keyframes dual-spin {
+            to { --dual-angle: 360deg; }
+        }
+
+        @keyframes segment-spin {
+            to { --segment-angle: 360deg; }
+        }
+
+        @keyframes neon-spin {
+            to { --neon-angle: 360deg; }
+        }
+
+        @keyframes pulse-spin {
+            to { --pulse-angle: 360deg; }
+        }
+
+        @keyframes chase-spin {
+            to { --chase-angle: 360deg; }
+        }
+
+        @keyframes elegant-spin {
+            to { --elegant-angle: 360deg; }
+        }
+
+        @keyframes fire-spin {
+            to { --fire-angle: 360deg; }
+        }
+
+        @keyframes ocean-spin {
+            to { --ocean-angle: 360deg; }
+        }
+
+        @keyframes electric-spin {
+            to { --electric-angle: 360deg; }
+        }
+
+        @keyframes hologram-spin {
+            to { --hologram-angle: 360deg; }
+        }
+
+        @keyframes hologram-shimmer {
+            0%, 100% { opacity: 1; }
+            25% { opacity: 0.7; }
+            50% { opacity: 1; }
+            75% { opacity: 0.8; }
+        }
+
+        @keyframes matrix-spin {
+            to { --matrix-angle: 360deg; }
+        }
+
+        @keyframes matrix-glitch {
+            0% { opacity: 1; }
+            10% { opacity: 0.1; }
+            11% { opacity: 1; }
+            20% { opacity: 0.3; }
+            21% { opacity: 1; }
+            30% { opacity: 0.8; }
+            40% { opacity: 0.2; }
+            41% { opacity: 1; }
+            50% { opacity: 0.9; }
+            60% { opacity: 0.1; }
+            61% { opacity: 1; }
+            70% { opacity: 0.4; }
+            80% { opacity: 1; }
+            90% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes quantum-spin {
+            to { --quantum-angle: 360deg; }
+        }
+
+        @keyframes quantum-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.8; }
+        }
+
+        @keyframes aurora-spin {
+            to { --aurora-angle: 360deg; }
+        }
+
+        @keyframes aurora-wave {
+            0%, 100% { opacity: 0.8; }
+            33% { opacity: 0.4; }
+            66% { opacity: 0.9; }
+        }
+
+        @keyframes plasma-spin {
+            to { --plasma-angle: 360deg; }
+        }
+
+        @keyframes plasma-intensity {
+            0%, 100% { filter: brightness(1) saturate(1); }
+            25% { filter: brightness(1.3) saturate(1.2); }
+            50% { filter: brightness(0.8) saturate(1.5); }
+            75% { filter: brightness(1.1) saturate(0.9); }
+        }
+
+        @keyframes galaxy-spin {
+            to { --galaxy-angle: 360deg; }
+        }
+
+        @keyframes galaxy-twinkle {
+            0%, 100% { opacity: 1; }
+            20% { opacity: 0.6; }
+            40% { opacity: 1; }
+            60% { opacity: 0.8; }
+            80% { opacity: 1; }
+        }
+
+        @keyframes reverse-spin {
+            to { --reverse-angle: -360deg; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Animate Borders</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque ad exercitationem voluptatem ullam et, natus impedit quae veniam optio a doloremque officiis beatae, itaque nesciunt nostrum quasi molestiae laudantium dolor asperiores soluta sint sed ratione cupiditate. Laudantium earum reiciendis enim.</p>
-  </div>
+    <h1>CSS Border Animation Collection</h1>
+    
+    <div class="grid-container">
+        <div class="card single-spin">
+            <h3>Single Red Border</h3>
+            <p>Classic red spinning border with blur shadow effect for depth.</p>
+        </div>
+
+        <div class="card rainbow-spin">
+            <h3>Rainbow Spectrum</h3>
+            <p>Full color wheel creating smooth rainbow border transition.</p>
+        </div>
+
+        <div class="card dual-spin">
+            <h3>Two-Color Split</h3>
+            <p>Blue and pink halves spinning together in perfect harmony.</p>
+        </div>
+
+        <div class="card segment-spin">
+            <h3>Detached Segments</h3>
+            <p>Green and red segments with gaps creating floating effect.</p>
+        </div>
+
+        <div class="card neon-glow">
+            <h3>Neon Cyberpunk</h3>
+            <p>Cyan, magenta, yellow creating retro futuristic aesthetic.</p>
+        </div>
+
+        <div class="card pulse-border">
+            <h3>Pulsing Effect</h3>
+            <p>Coral border spinning while pulsing opacity rhythmically.</p>
+        </div>
+
+        <div class="card reverse-spin">
+            <h3>Reverse Purple</h3>
+            <p>Purple gradient spinning counterclockwise with slower motion.</p>
+        </div>
+
+        <div class="card chase-spin">
+            <h3>Chasing Segments</h3>
+            <p>Three colored segments chasing each other around border.</p>
+        </div>
+
+        <div class="card elegant-spin">
+            <h3>Minimal White</h3>
+            <p>Subtle white highlight with slow elegant rotation speed.</p>
+        </div>
+
+        <div class="card fire-theme">
+            <h3>Fire Blaze</h3>
+            <p>Hot fire colors spinning rapidly like burning flames.</p>
+        </div>
+
+        <div class="card ocean-theme">
+            <h3>Ocean Waves</h3>
+            <p>Cool blue and teal colors flowing like ocean currents.</p>
+        </div>
+
+        <div class="card electric-theme">
+            <h3>Electric Bolt</h3>
+            <p>Multiple lightning bolts with flickering thunder sparkle effect.</p>
+        </div>
+
+        <div class="card hologram-border">
+            <h3>Holographic Iridescent</h3>
+            <p>Rainbow hologram effect with shimmering iridescent colors.</p>
+        </div>
+
+        <div class="card matrix-border">
+            <h3>Digital Matrix Rain</h3>
+            <p>Green code rain segments with digital glitch effects.</p>
+        </div>
+
+        <div class="card quantum-border">
+            <h3>Quantum Particle Wave</h3>
+            <p>Particle physics inspired with quantum energy pulsing.</p>
+        </div>
+
+        <div class="card aurora-border">
+            <h3>Aurora Borealis</h3>
+            <p>Northern lights effect with mystical flowing colors.</p>
+        </div>
+
+        <div class="card plasma-border">
+            <h3>Plasma Energy Field</h3>
+            <p>High-energy plasma with dynamic intensity variations.</p>
+        </div>
+
+        <div class="card galaxy-border">
+            <h3>Galaxy Spiral</h3>
+            <p>Cosmic galaxy colors with twinkling star effect.</p>
+        </div>
+    </div>
 </body>
 </html>
